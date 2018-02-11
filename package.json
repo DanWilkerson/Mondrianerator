@@ -1,0 +1,38 @@
+{
+  "name": "mondrianerator",
+  "version": "1.0.0",
+  "description": "Deterministically generated Mondrian-esque canvas renderings",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-register": "^6.26.0",
+    "express": "^4.14.0",
+    "faucet": "^0.0.1",
+    "nodemon": "^1.3.6",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.8.0",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  },
+  "scripts": {
+    "test": "node_modules/tape/bin/tape ./test/index.spec.js",
+    "build": "npx webpack",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danwilkerson/mondrianerator.git"
+  },
+  "keywords": [
+    "mondrian",
+    "generator"
+  ],
+  "author": "Dan Wilkerson <notdanwilkerson@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danwilkerson/mondrianerator/issues"
+  },
+  "homepage": "https://github.com/danwilkerson/mondrianerator#readme"
+}
