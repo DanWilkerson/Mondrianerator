@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "Deterministically generated Mondrian-esque canvas renderings",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "eslint": "^4.18.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-register": "^6.26.0",
+    "eslint-config-google": "^0.9.1",
     "express": "^4.14.0",
     "faucet": "^0.0.1",
     "nodemon": "^1.3.6",
@@ -17,7 +20,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "scripts": {
-    "test": "node_modules/tape/bin/tape ./test/index.spec.js",
+    "test": "node_modules/tape/bin/tape --require babel-register ./test/index.spec.js",
     "build": "npx webpack",
     "start": "webpack-dev-server"
   },

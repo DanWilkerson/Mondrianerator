@@ -3,8 +3,15 @@ const path = require('path');
 
 module.exports = {
   context: __dirname,
-  entry: [
-    path.resolve(__dirname, 'src', 'index.js')
+  entry: {
+    Mondrianerator: path.resolve(__dirname, 'src', 'index.js'),
+    "Mondrianerator.min": path.resolve(__dirname, 'src', 'index.js'),
+  },
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      include: /\.min\.js$/,
+      minimize: true
+    })
   ],
   module: {
     loaders: [{
@@ -14,10 +21,9 @@ module.exports = {
     }]
   },
   output: {
-    filename: 'Mondrianerator.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
-  devtool: 'source-map',
   watchOptions: {
     ignored: 'node_modules'
   }

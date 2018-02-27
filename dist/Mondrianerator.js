@@ -1,3 +1,74 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /**
  * @param {Object} config
  * @param {HTMLElement} config.mount
@@ -36,7 +107,6 @@ function Mondrianerate(config) {
     height: height,
     width: width
   });
-
 }
 
 /**
@@ -49,50 +119,42 @@ Mondrianerate.prototype.Render = function Render(config) {
 
   const color = this._getColor();
   const rect = this.DrawRect(Object.assign({}, config, {
-    fill: color,
+    fill: color
   }));
 
-
-  if (this._shouldBisect({height: config.height, width: config.width})) {
+  if (this._shouldBisect({ height: config.height, width: config.width })) {
 
     let childConfigs = this._split(config);
 
     return childConfigs.forEach(childConfig => this.Render(childConfig));
-
   }
 
   this._mount.appendChild(rect[0]);
   this._mount.appendChild(rect[1]);
-
 };
 
 /**
  * @returns {Boolean}
  */
-Mondrianerate.prototype._shouldBisect = function(config) {
+Mondrianerate.prototype._shouldBisect = function (config) {
 
   const rand = this._rand();
 
-  const shouldBisect = this._bisectCount < this._minBisects ||
-    rand <= this._bisectChance &&
-    config.height >= this._minDim &&
-    config.width >= this._minDim;
+  const shouldBisect = this._bisectCount < this._minBisects || rand <= this._bisectChance && config.height >= this._minDim && config.width >= this._minDim;
 
   if (shouldBisect) {
 
     this._bisectCount++;
     this._bisectChance = this._bisectChance / 1.125;
-
   }
 
   return shouldBisect;
-
 };
 
 /**
  * @returns {String}
  */
-Mondrianerate.prototype._getColor = function() {
+Mondrianerate.prototype._getColor = function () {
 
   const rand = this._rand();
 
@@ -101,11 +163,9 @@ Mondrianerate.prototype._getColor = function() {
     if (rand < 0.1) return 'black';
 
     return this._choosePrimary(rand);
-
   }
 
   return 'white';
-
 };
 
 /**
@@ -113,9 +173,9 @@ Mondrianerate.prototype._getColor = function() {
  *
  * @returns {String}
  */
-Mondrianerate.prototype._choosePrimary = function(n) {
+Mondrianerate.prototype._choosePrimary = function (n) {
 
-  const total = Object.keys(this._colorWeights).reduce((t, k) => t += this._colorWeights[k], 0)
+  const total = Object.keys(this._colorWeights).reduce((t, k) => t += this._colorWeights[k], 0);
   const weighted = n * total;
   const red = this._colorWeights.red;
   const blue = this._colorWeights.blue + red;
@@ -125,23 +185,19 @@ Mondrianerate.prototype._choosePrimary = function(n) {
 
     this._colorWeights.red /= 20;
     return 'red';
-
   }
 
   if (weighted <= blue) {
 
     this._colorWeights.blue /= 20;
     return 'blue';
-
   }
 
   if (weighted <= yellow) {
 
     this._colorWeights.yellow /= 20;
     return 'yellow';
-
   }
-
 };
 
 /**
@@ -149,7 +205,7 @@ Mondrianerate.prototype._choosePrimary = function(n) {
  *
  * @returns {Object[]}
  */
-Mondrianerate.prototype._split = function(config) {
+Mondrianerate.prototype._split = function (config) {
 
   const rand = this._rand();
   let direction;
@@ -158,12 +214,10 @@ Mondrianerate.prototype._split = function(config) {
 
     direction = ['height', 'y'];
     this._directionWeight += this._directionWeight / 2;
-
   } else {
 
     direction = ['width', 'x'];
     this._directionWeight -= this._directionWeight / 2;
-
   }
 
   const minPerc = this._minDim / config[direction[0]];
@@ -178,9 +232,7 @@ Mondrianerate.prototype._split = function(config) {
     if (i) childConfig[direction[1]] = childConfig[direction[1]] + config[direction[0]] * perc;
 
     return childConfig;
-
   });
-
 };
 
 /**
@@ -193,7 +245,7 @@ Mondrianerate.prototype._split = function(config) {
  *
  * @returns {SVGElement}
  */
-Mondrianerate.prototype.DrawRect = function(config) {
+Mondrianerate.prototype.DrawRect = function (config) {
 
   const outerRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   const innerRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -209,19 +261,20 @@ Mondrianerate.prototype.DrawRect = function(config) {
   innerRect.setAttributeNS(null, 'width', config.width - 2 * this._borderWidth);
 
   return [outerRect, innerRect];
-
 };
 
 /**
  * Adapted from @link https://gist.github.com/blixt/f17b47c62508be59987b
  * @returns {Number}
  */
-Mondrianerate.prototype._rand = function() {
+Mondrianerate.prototype._rand = function () {
 
   this._seed = this._seed * 16808 % 2147483647;
 
   return (this._seed - 1) / 2147483646;
-
 };
 
-export default Mondrianerate;
+/* harmony default export */ __webpack_exports__["default"] = (Mondrianerate);
+
+/***/ })
+/******/ ]);
