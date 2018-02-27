@@ -4,4 +4,16 @@ Deterministically generated SVGs in the style of [Piet Mondrian](https://en.wiki
 
 ## Usage
 
-`require/import/etc` the library, then call
+```javascript
+const Mondrianerate = require('Mondrianerator');
+// OR
+import Mondrianerate from 'Mondrianerator';
+// etc
+
+const mount = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+const seed = +new Date;
+
+Mondrianerate({mount, seed});
+```
+
+Licensed under the MIT license (see LICENSE.MD for full text).

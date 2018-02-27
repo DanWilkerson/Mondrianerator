@@ -1,7 +1,7 @@
 {
   "name": "mondrianerator",
-  "version": "1.0.0",
-  "description": "Deterministically generated Mondrian-esque canvas renderings",
+  "version": "1.0.1",
+  "description": "Deterministically generated SVGs in the style of Piet Mondrian",
   "main": "index.js",
   "dependencies": {
     "eslint": "^4.18.1"
