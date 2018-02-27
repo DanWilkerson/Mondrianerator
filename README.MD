@@ -2,6 +2,8 @@
 
 Deterministically generated SVGs in the style of [Piet Mondrian](https://en.wikipedia.org/wiki/Piet_Mondrian).
 
+[Live demo](https://output.jsbin.com/hiseqisuze).
+
 ## Usage
 
 ```javascript
