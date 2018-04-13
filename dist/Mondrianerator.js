@@ -78,8 +78,8 @@ function Mondrianerate(config) {
 
   if (!(this instanceof Mondrianerate)) return new Mondrianerate(config);
 
-  const height = config.mount.getBoundingClientRect().height;
-  const width = config.mount.getBoundingClientRect().width;
+  var height = config.mount.getBoundingClientRect().height;
+  var width = config.mount.getBoundingClientRect().width;
 
   this._mount = config.mount;
   this._borderWidth = Math.min(height, width) * 0.02;
@@ -116,17 +116,20 @@ function Mondrianerate(config) {
  * @prop {Number} width
  */
 Mondrianerate.prototype.Render = function Render(config) {
+  var _this = this;
 
-  const color = this._getColor();
-  const rect = this.DrawRect(Object.assign({}, config, {
+  var color = this._getColor();
+  var rect = this.DrawRect(Object.assign({}, config, {
     fill: color
   }));
 
   if (this._shouldBisect({ height: config.height, width: config.width })) {
 
-    let childConfigs = this._split(config);
+    var childConfigs = this._split(config);
 
-    return childConfigs.forEach(childConfig => this.Render(childConfig));
+    return childConfigs.forEach(function (childConfig) {
+      return _this.Render(childConfig);
+    });
   }
 
   this._mount.appendChild(rect[0]);
@@ -138,9 +141,9 @@ Mondrianerate.prototype.Render = function Render(config) {
  */
 Mondrianerate.prototype._shouldBisect = function (config) {
 
-  const rand = this._rand();
+  var rand = this._rand();
 
-  const shouldBisect = this._bisectCount < this._minBisects || rand <= this._bisectChance && config.height >= this._minDim && config.width >= this._minDim;
+  var shouldBisect = this._bisectCount < this._minBisects || rand <= this._bisectChance && config.height >= this._minDim && config.width >= this._minDim;
 
   if (shouldBisect) {
 
@@ -156,7 +159,7 @@ Mondrianerate.prototype._shouldBisect = function (config) {
  */
 Mondrianerate.prototype._getColor = function () {
 
-  const rand = this._rand();
+  var rand = this._rand();
 
   if (rand > 0.5) {
 
@@ -174,12 +177,15 @@ Mondrianerate.prototype._getColor = function () {
  * @returns {String}
  */
 Mondrianerate.prototype._choosePrimary = function (n) {
+  var _this2 = this;
 
-  const total = Object.keys(this._colorWeights).reduce((t, k) => t += this._colorWeights[k], 0);
-  const weighted = n * total;
-  const red = this._colorWeights.red;
-  const blue = this._colorWeights.blue + red;
-  const yellow = this._colorWeights.yellow + blue;
+  var total = Object.keys(this._colorWeights).reduce(function (t, k) {
+    return t += _this2._colorWeights[k];
+  }, 0);
+  var weighted = n * total;
+  var red = this._colorWeights.red;
+  var blue = this._colorWeights.blue + red;
+  var yellow = this._colorWeights.yellow + blue;
 
   if (weighted <= red) {
 
@@ -206,9 +212,10 @@ Mondrianerate.prototype._choosePrimary = function (n) {
  * @returns {Object[]}
  */
 Mondrianerate.prototype._split = function (config) {
+  var _this3 = this;
 
-  const rand = this._rand();
-  let direction;
+  var rand = this._rand();
+  var direction = void 0;
 
   if (rand > this._directionWeight) {
 
@@ -220,15 +227,15 @@ Mondrianerate.prototype._split = function (config) {
     this._directionWeight -= this._directionWeight / 2;
   }
 
-  const minPerc = this._minDim / config[direction[0]];
-  const maxPerc = 1 - minPerc;
-  const perc = Math.max(Math.min(this._rand(), maxPerc), minPerc);
+  var minPerc = this._minDim / config[direction[0]];
+  var maxPerc = 1 - minPerc;
+  var perc = Math.max(Math.min(this._rand(), maxPerc), minPerc);
 
-  return [perc, 1 - perc].map((p, i) => {
+  return [perc, 1 - perc].map(function (p, i) {
 
-    const childConfig = Object.assign({}, config);
+    var childConfig = Object.assign({}, config);
 
-    childConfig[direction[0]] = childConfig[direction[0]] * p + (!i ? this._borderWidth : 0);
+    childConfig[direction[0]] = childConfig[direction[0]] * p + (!i ? _this3._borderWidth : 0);
     if (i) childConfig[direction[1]] = childConfig[direction[1]] + config[direction[0]] * perc;
 
     return childConfig;
@@ -247,10 +254,12 @@ Mondrianerate.prototype._split = function (config) {
  */
 Mondrianerate.prototype.DrawRect = function (config) {
 
-  const outerRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-  const innerRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  var outerRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  var innerRect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
-  Object.keys(config).forEach(a => outerRect.setAttributeNS(null, a, config[a]));
+  Object.keys(config).forEach(function (a) {
+    return outerRect.setAttributeNS(null, a, config[a]);
+  });
 
   outerRect.setAttributeNS(null, 'fill', 'black');
 
