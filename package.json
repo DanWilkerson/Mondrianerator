@@ -4,8 +4,6 @@
   "description": "Deterministically generated SVGs in the style of Piet Mondrian",
   "main": "index.js",
   "dependencies": {
-    "babel-preset-es2015": "^6.24.1",
-    "eslint": "^4.18.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -14,10 +12,11 @@
     "eslint-config-google": "^0.9.1",
     "nodemon": "^1.3.6",
     "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack-dev-server": "^2.11.1",
+    "babel-preset-es2015": "^6.24.1",
+    "eslint": "^4.18.1"
   },
   "scripts": {
-    "test": "node_modules/tape/bin/tape --require babel-register ./test/index.spec.js",
     "build": "npx webpack",
     "start": "webpack-dev-server",
     "lint": "npx eslint src/*"

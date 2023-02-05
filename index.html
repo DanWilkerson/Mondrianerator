@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <style> * { font-family: sans-serif } </style>
   </head>
   <body>
     <h1>Demo</h1>
-    <div id="root"></div>
+    <svg id="root"></svg>
     <label> Seed:
-      <input type="text" />
+      <input id="seed" type="text" />
     </label>
+    <script src="/dist/Mondrianerator.min.js"></script>
+    <script>
+      const mount = document.getElementById("root");
+      const seed = +new Date;
+      const seedInput = document.getElementById("seed");
+      seedInput.addEventListener("change", () => {
+        Mondrianerate({mount, seedInput.value});
+      });
+      seedInput.value = +new Date;
+    </script>
   </body>
 </html>

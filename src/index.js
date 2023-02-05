@@ -73,8 +73,8 @@ Mondrianerate.prototype._shouldBisect = function(config) {
 
   const rand = this._rand();
 
-  const shouldBisect = this._bisectCount < this._minBisects ||
-    rand <= this._bisectChance &&
+  const shouldBisect = (this._bisectCount < this._minBisects ||
+    rand <= this._bisectChance) &&
     config.height >= this._minDim &&
     config.width >= this._minDim;
 
