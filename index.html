@@ -15,7 +15,7 @@
       const seed = +new Date;
       const seedInput = document.getElementById("seed");
       seedInput.addEventListener("change", () => {
-        Mondrianerate({mount, seedInput.value});
+        Mondrianerate({mount, seed: seedInput.value});
       });
       seedInput.value = +new Date;
     </script>
